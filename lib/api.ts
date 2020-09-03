@@ -21,6 +21,11 @@ export class API {
     return url;
   }
 
+  private _buildUrlWithRoomName(method: string, roomName: string): string {
+    const baseUrl = this._buildUrl(method);
+    return baseUrl + "&roomName=" + roomName;
+  }
+
   /** Get a unique ID from the server via XHR and initialize with it. */
   async retrieveId(): Promise<string> {
     const url = this._buildUrl("id");
@@ -53,8 +58,8 @@ export class API {
   }
 
   /** @deprecated */
-  async listAllPeers(): Promise<any[]> {
-    const url = this._buildUrl("peers");
+  async listAllPeers(roomName: string): Promise<any[]> {
+    const url = this._buildUrlWithRoomName("peers", roomName);
 
     try {
       const response = await fetch(url);
