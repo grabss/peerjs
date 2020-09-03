@@ -41,6 +41,7 @@ export class Peer extends EventEmitter {
   private readonly _socket: Socket;
 
   private _id: string | null = null;
+  private _roomName: string | null = null;
   private _lastServerId: string | null = null;
 
   // States.
@@ -52,6 +53,10 @@ export class Peer extends EventEmitter {
 
   get id() {
     return this._id;
+  }
+
+  get roomName() {
+    return this._roomName;
   }
 
   get options() {
@@ -209,6 +214,7 @@ export class Peer extends EventEmitter {
   /** Initialize a connection with the server. */
   private _initialize(id: string): void {
     this._id = id;
+    this._roomName = this.options.roomName;
     this.socket.start(id, this._options.token!, this.options.roomName);
   }
 
@@ -558,7 +564,7 @@ export class Peer extends EventEmitter {
    * your key.
    */
   listAllPeers(cb = (_: any[]) => { }): void {
-    this._api.listAllPeers()
+    this._api.listAllPeers(this.roomName)
       .then(peers => cb(peers))
       .catch(error => this._abort(PeerErrorType.ServerError, error));
   }
