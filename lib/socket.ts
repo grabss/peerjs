@@ -29,10 +29,10 @@ export class Socket extends EventEmitter {
     this._baseUrl = wsProtocol + host + ":" + port + path + "peerjs?key=" + key;
   }
 
-  start(id: string, token: string): void {
+  start(id: string, token: string, room: string): void {
     this._id = id;
 
-    const wsUrl = `${this._baseUrl}&id=${id}&token=${token}`;
+    const wsUrl = `${this._baseUrl}&id=${id}&token=${token}&room=${room}`;
 
     if (!!this._socket || !this._disconnected) {
       return;
