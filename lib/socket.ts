@@ -32,7 +32,11 @@ export class Socket extends EventEmitter {
   start(id: string, token: string, roomName: string): void {
     this._id = id;
 
-    const wsUrl = `${this._baseUrl}&id=${id}&token=${token}&roomName=${roomName}`;
+    let wsUrl = `${this._baseUrl}&id=${id}&token=${token}`;
+
+    if (roomName) {
+      wsUrl += `&roomName=${roomName}`;
+    }
 
     if (!!this._socket || !this._disconnected) {
       return;
