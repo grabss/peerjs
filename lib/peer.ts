@@ -72,8 +72,8 @@ export class Peer extends EventEmitter {
   }
 
   /**
-   * @deprecated 
-   * Return type will change from Object to Map<string,[]> 
+   * @deprecated
+   * Return type will change from Object to Map<string,[]>
    */
   get connections(): Object {
     const plainConnections = Object.create(null);
@@ -563,9 +563,9 @@ export class Peer extends EventEmitter {
    * the cloud server, email team@peerjs.com to get the functionality enabled for
    * your key.
    */
-  listAllPeers(cb = (_: any[]) => { }): void {
-    this._api.listAllPeers(this.roomName)
-      .then(peers => cb(peers))
-      .catch(error => this._abort(PeerErrorType.ServerError, error));
-  }
+  // listAllPeers(cb = (_: any[]) => { }): void {
+  //   this._api.listAllPeers(this.roomName)
+  //     .then(peers => cb(peers))
+  //     .catch(error => this._abort(PeerErrorType.ServerError, error));
+  // }
 }

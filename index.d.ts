@@ -110,7 +110,7 @@ declare class Peer {
    * Get a list of available peer IDs
    * @param callback
    */
-  listAllPeers(callback: (peerIds: Array<string>) => void): void;
+  // listAllPeers(callback: (peerIds: Array<string>) => void): void;
   /**
    * The brokering ID of this peer
    */

@@ -58,38 +58,38 @@ export class API {
   }
 
   /** @deprecated */
-  async listAllPeers(roomName: string): Promise<any[]> {
-    const url = this._buildUrlWithRoomName("peers", roomName);
-
-    try {
-      const response = await fetch(url);
-
-      if (response.status !== 200) {
-        if (response.status === 401) {
-          let helpfulError = "";
-
-          if (this._options.host === util.CLOUD_HOST) {
-            helpfulError =
-              "It looks like you're using the cloud server. You can email " +
-              "team@peerjs.com to enable peer listing for your API key.";
-          } else {
-            helpfulError =
-              "You need to enable `allow_discovery` on your self-hosted " +
-              "PeerServer to use this feature.";
-          }
-
-          throw new Error("It doesn't look like you have permission to list peers IDs. " +
-            helpfulError);
-        }
-
-        throw new Error(`Error. Status:${response.status}`);
-      }
-
-      return response.json();
-    } catch (error) {
-      logger.error("Error retrieving list peers", error);
-
-      throw new Error("Could not get list peers from the server." + error);
-    }
-  }
+  // async listAllPeers(roomName: string): Promise<any[]> {
+  //   const url = this._buildUrlWithRoomName("peers", roomName);
+  //
+  //   try {
+  //     const response = await fetch(url);
+  //
+  //     if (response.status !== 200) {
+  //       if (response.status === 401) {
+  //         let helpfulError = "";
+  //
+  //         if (this._options.host === util.CLOUD_HOST) {
+  //           helpfulError =
+  //             "It looks like you're using the cloud server. You can email " +
+  //             "team@peerjs.com to enable peer listing for your API key.";
+  //         } else {
+  //           helpfulError =
+  //             "You need to enable `allow_discovery` on your self-hosted " +
+  //             "PeerServer to use this feature.";
+  //         }
+  //
+  //         throw new Error("It doesn't look like you have permission to list peers IDs. " +
+  //           helpfulError);
+  //       }
+  //
+  //       throw new Error(`Error. Status:${response.status}`);
+  //     }
+  //
+  //     return response.json();
+  //   } catch (error) {
+  //     logger.error("Error retrieving list peers", error);
+  //
+  //     throw new Error("Could not get list peers from the server." + error);
+  //   }
+  // }
 }
