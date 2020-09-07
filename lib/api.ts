@@ -21,6 +21,11 @@ export class API {
     return url;
   }
 
+  private _buildUrlWithRoomName(method: string, roomName: string): string {
+    const baseUrl = this._buildUrl(method);
+    return baseUrl + "&roomName=" + roomName;
+  }
+
   /** Get a unique ID from the server via XHR and initialize with it. */
   async retrieveId(): Promise<string> {
     const url = this._buildUrl("id");
@@ -52,39 +57,21 @@ export class API {
     }
   }
 
-  /** @deprecated */
-  async listAllPeers(): Promise<any[]> {
-    const url = this._buildUrl("peers");
+  async knock(roomName: string): Promise<any[]> {
+    const url = this._buildUrlWithRoomName("knock", roomName);
 
     try {
       const response = await fetch(url);
 
       if (response.status !== 200) {
-        if (response.status === 401) {
-          let helpfulError = "";
-
-          if (this._options.host === util.CLOUD_HOST) {
-            helpfulError =
-              "It looks like you're using the cloud server. You can email " +
-              "team@peerjs.com to enable peer listing for your API key.";
-          } else {
-            helpfulError =
-              "You need to enable `allow_discovery` on your self-hosted " +
-              "PeerServer to use this feature.";
-          }
-
-          throw new Error("It doesn't look like you have permission to list peers IDs. " +
-            helpfulError);
-        }
-
         throw new Error(`Error. Status:${response.status}`);
       }
 
       return response.json();
     } catch (error) {
-      logger.error("Error retrieving list peers", error);
+      logger.error("Error knocks", error);
 
-      throw new Error("Could not get list peers from the server." + error);
+      throw new Error("Error" + error);
     }
   }
 }

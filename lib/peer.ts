@@ -23,7 +23,7 @@ class PeerOptions implements PeerJSOption {
   path?: string;
   key?: string;
   token?: string;
-  room?: string;
+  roomName?: string;
   config?: any;
   secure?: boolean;
   pingInterval?: number;
@@ -41,6 +41,7 @@ export class Peer extends EventEmitter {
   private readonly _socket: Socket;
 
   private _id: string | null = null;
+  private _roomName: string | null = null;
   private _lastServerId: string | null = null;
 
   // States.
@@ -52,6 +53,10 @@ export class Peer extends EventEmitter {
 
   get id() {
     return this._id;
+  }
+
+  get roomName() {
+    return this._roomName;
   }
 
   get options() {
@@ -67,8 +72,8 @@ export class Peer extends EventEmitter {
   }
 
   /**
-   * @deprecated 
-   * Return type will change from Object to Map<string,[]> 
+   * @deprecated
+   * Return type will change from Object to Map<string,[]>
    */
   get connections(): Object {
     const plainConnections = Object.create(null);
@@ -209,7 +214,8 @@ export class Peer extends EventEmitter {
   /** Initialize a connection with the server. */
   private _initialize(id: string): void {
     this._id = id;
-    this.socket.start(id, this._options.token!, this.options.room);
+    this._roomName = this.options.roomName;
+    this.socket.start(id, this._options.token!, this.options.roomName);
   }
 
   /** Handles messages from the server. */
@@ -222,7 +228,7 @@ export class Peer extends EventEmitter {
       case ServerMessageType.Open: // The connection to the server is open.
         this._lastServerId = this.id;
         this._open = true;
-        this.emit(PeerEventType.Open, this.id);
+        this.emit(PeerEventType.Open, this.id, payload);
         break;
       case ServerMessageType.Error: // Server error.
         this._abort(PeerErrorType.ServerError, payload.msg);
@@ -550,16 +556,10 @@ export class Peer extends EventEmitter {
       throw new Error(`Peer ${this.id} cannot reconnect because it is not disconnected from the server!`);
     }
   }
-
-  /**
-   * Get a list of available peer IDs. If you're running your own server, you'll
-   * want to set allow_discovery: true in the PeerServer options. If you're using
-   * the cloud server, email team@peerjs.com to get the functionality enabled for
-   * your key.
-   */
-  listAllPeers(cb = (_: any[]) => { }): void {
-    this._api.listAllPeers()
-      .then(peers => cb(peers))
+  
+  knock(roomName: string, cb = (_: any[]) => { }): void {
+    this._api.knock(roomName)
+      .then(result => cb(result))
       .catch(error => this._abort(PeerErrorType.ServerError, error));
   }
 }
