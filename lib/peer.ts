@@ -226,7 +226,6 @@ export class Peer extends EventEmitter {
 
     switch (type) {
       case ServerMessageType.Open: // The connection to the server is open.
-        console.log('Open');
         this._lastServerId = this.id;
         this._open = true;
         this.emit(PeerEventType.Open, this.id, payload);
@@ -241,7 +240,6 @@ export class Peer extends EventEmitter {
         this._abort(PeerErrorType.InvalidKey, `API KEY "${this._options.key}" is invalid`);
         break;
       case ServerMessageType.Leave: // Another peer has closed its connection to this peer.
-        console.log(`Received leave message from ${peerId}`);
         logger.log(`Received leave message from ${peerId}`);
         this._cleanupPeer(peerId);
         this._connections.delete(peerId);
