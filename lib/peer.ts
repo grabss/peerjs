@@ -556,16 +556,10 @@ export class Peer extends EventEmitter {
       throw new Error(`Peer ${this.id} cannot reconnect because it is not disconnected from the server!`);
     }
   }
-
-  /**
-   * Get a list of available peer IDs. If you're running your own server, you'll
-   * want to set allow_discovery: true in the PeerServer options. If you're using
-   * the cloud server, email team@peerjs.com to get the functionality enabled for
-   * your key.
-   */
-  // listAllPeers(cb = (_: any[]) => { }): void {
-  //   this._api.listAllPeers(this.roomName)
-  //     .then(peers => cb(peers))
-  //     .catch(error => this._abort(PeerErrorType.ServerError, error));
-  // }
+  
+  knock(roomName: string, cb = (_: any[]) => { }): void {
+    this._api.knock(roomName)
+      .then(result => cb(result))
+      .catch(error => this._abort(PeerErrorType.ServerError, error));
+  }
 }

@@ -106,11 +106,8 @@ declare class Peer {
    */
   getConnection(peerId: string, connectionId: string): Peer.MediaConnection | Peer.DataConnection | null;
 
-  /**
-   * Get a list of available peer IDs
-   * @param callback
-   */
-  // listAllPeers(callback: (peerIds: Array<string>) => void): void;
+  knock(roomName: string, callback: (result: Boolean) => void): void;
+
   /**
    * The brokering ID of this peer
    */
