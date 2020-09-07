@@ -228,7 +228,7 @@ export class Peer extends EventEmitter {
       case ServerMessageType.Open: // The connection to the server is open.
         this._lastServerId = this.id;
         this._open = true;
-        this.emit(PeerEventType.Open, this.id);
+        this.emit(PeerEventType.Open, this.id, payload);
         break;
       case ServerMessageType.Error: // Server error.
         this._abort(PeerErrorType.ServerError, payload.msg);
