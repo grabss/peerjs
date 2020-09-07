@@ -34,7 +34,7 @@ export class Socket extends EventEmitter {
 
     let wsUrl = `${this._baseUrl}&id=${id}&token=${token}`;
 
-    if (roomName) {
+    if (roomName != undefined) {
       wsUrl += `&roomName=${roomName}`;
     }
 
