@@ -225,6 +225,9 @@ export class Peer extends EventEmitter {
     const peerId = message.src;
 
     switch (type) {
+      case ServerMessageType.KnockReply:
+        this.emit(PeerEventType.KnockReply, this.id, payload);
+        break;
       case ServerMessageType.Open: // The connection to the server is open.
         this._lastServerId = this.id;
         this._open = true;

@@ -18,7 +18,8 @@ export enum PeerEventType {
   Connection = "connection",
   Call = "call",
   Disconnected = "disconnected",
-  Error = "error"
+  Error = "error",
+  KnockReply = "knock-reply"
 }
 
 export enum PeerErrorType {
@@ -61,5 +62,6 @@ export enum ServerMessageType {
   Leave = "LEAVE", // Another peer has closed its connection to this peer.
   Expire = "EXPIRE", // The offer sent to a peer has expired without response.
   // 追加
-  Knock = "KNOCK"
+  Knock = "KNOCK",
+  KnockReply = "KNOCK-REPLY"
 }
