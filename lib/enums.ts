@@ -13,6 +13,7 @@ export enum ConnectionType {
 }
 
 export enum PeerEventType {
+  Connect = "connect",
   Open = "open",
   Close = "close",
   Connection = "connection",
@@ -55,6 +56,7 @@ export enum ServerMessageType {
   Candidate = "CANDIDATE",
   Offer = "OFFER",
   Answer = "ANSWER",
+  Connect = "CONNECT",
   Open = "OPEN", // The connection to the server is open.
   Error = "ERROR", // Server error.
   IdTaken = "ID-TAKEN", // The selected ID is taken.
