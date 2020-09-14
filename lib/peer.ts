@@ -565,8 +565,5 @@ export class Peer extends EventEmitter {
       },
       dst: this.id
     })
-    // this._api.knock(roomName)
-    //   .then(result => cb(result))
-    //   .catch(error => this._abort(PeerErrorType.ServerError, error));
   }
 }
