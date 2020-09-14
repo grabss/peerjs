@@ -20,7 +20,8 @@ export enum PeerEventType {
   Call = "call",
   Disconnected = "disconnected",
   Error = "error",
-  KnockReply = "knock-reply"
+  KnockReply = "knock-reply",
+  PasswordChanged = "password-changed"
 }
 
 export enum PeerErrorType {
@@ -67,5 +68,6 @@ export enum ServerMessageType {
   KnockReply = "KNOCK-REPLY",
   Connect = "CONNECT",
   EnterRoom = "ENTER-ROOM",
-  SetPassword = "SET-PASSWORD"
+  SetPassword = "SET-PASSWORD",
+  PasswordChanged = "PASSWORD-CHANGED"
 }

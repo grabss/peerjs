@@ -234,6 +234,9 @@ export class Peer extends EventEmitter {
       case ServerMessageType.KnockReply:
         this.emit(PeerEventType.KnockReply, this.id, payload);
         break;
+      case ServerMessageType.PasswordChanged:
+        this.emit(PeerEventType.PasswordChanged, this.id, payload);
+        break;
       case ServerMessageType.Connect:
         this.emit(PeerEventType.Connect, this.id, payload);
         break;
