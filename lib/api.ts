@@ -56,22 +56,4 @@ export class API {
       throw new Error("Could not get an ID from the server." + pathError);
     }
   }
-
-  async knock(roomName: string): Promise<any[]> {
-    const url = this._buildUrlWithRoomName("knock", roomName);
-
-    try {
-      const response = await fetch(url);
-
-      if (response.status !== 200) {
-        throw new Error(`Error. Status:${response.status}`);
-      }
-
-      return response.json();
-    } catch (error) {
-      logger.error("Error knocks", error);
-
-      throw new Error("Error" + error);
-    }
-  }
 }

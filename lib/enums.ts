@@ -13,12 +13,15 @@ export enum ConnectionType {
 }
 
 export enum PeerEventType {
+  Connect = "connect",
   Open = "open",
   Close = "close",
   Connection = "connection",
   Call = "call",
   Disconnected = "disconnected",
-  Error = "error"
+  Error = "error",
+  KnockReply = "knock-reply",
+  PasswordChanged = "password-changed"
 }
 
 export enum PeerErrorType {
@@ -59,6 +62,12 @@ export enum ServerMessageType {
   IdTaken = "ID-TAKEN", // The selected ID is taken.
   InvalidKey = "INVALID-KEY", // The given API key cannot be found.
   Leave = "LEAVE", // Another peer has closed its connection to this peer.
-  Expire = "EXPIRE" // The offer sent to a peer has expired without response.
-
+  Expire = "EXPIRE", // The offer sent to a peer has expired without response.
+  // 追加
+  Knock = "KNOCK",
+  KnockReply = "KNOCK-REPLY",
+  Connect = "CONNECT",
+  EnterRoom = "ENTER-ROOM",
+  SetPassword = "SET-PASSWORD",
+  PasswordChanged = "PASSWORD-CHANGED"
 }

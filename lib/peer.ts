@@ -24,6 +24,7 @@ class PeerOptions implements PeerJSOption {
   key?: string;
   token?: string;
   roomName?: string;
+  password?: string;
   config?: any;
   secure?: boolean;
   pingInterval?: number;
@@ -215,7 +216,12 @@ export class Peer extends EventEmitter {
   private _initialize(id: string): void {
     this._id = id;
     this._roomName = this.options.roomName;
-    this.socket.start(id, this._options.token!, this.options.roomName);
+    this.socket.start(
+      id,
+      this._options.token!,
+      this._options.roomName,
+      this._options.password
+    );
   }
 
   /** Handles messages from the server. */
@@ -225,6 +231,15 @@ export class Peer extends EventEmitter {
     const peerId = message.src;
 
     switch (type) {
+      case ServerMessageType.KnockReply:
+        this.emit(PeerEventType.KnockReply, this.id, payload);
+        break;
+      case ServerMessageType.PasswordChanged:
+        this.emit(PeerEventType.PasswordChanged, this.id, payload);
+        break;
+      case ServerMessageType.Connect:
+        this.emit(PeerEventType.Connect, this.id, payload);
+        break;
       case ServerMessageType.Open: // The connection to the server is open.
         this._lastServerId = this.id;
         this._open = true;
@@ -556,10 +571,34 @@ export class Peer extends EventEmitter {
       throw new Error(`Peer ${this.id} cannot reconnect because it is not disconnected from the server!`);
     }
   }
-  
-  knock(roomName: string, cb = (_: any[]) => { }): void {
-    this._api.knock(roomName)
-      .then(result => cb(result))
-      .catch(error => this._abort(PeerErrorType.ServerError, error));
+
+  knock(roomName: string): void {
+    this.socket.send({
+      type: ServerMessageType.Knock,
+      payload: {
+        roomName: roomName
+      },
+      dst: this.id
+    })
+  }
+
+  enterRoom(password: string): void {
+    this.socket.send({
+      type: ServerMessageType.EnterRoom,
+      payload: {
+        password: password
+      },
+      dst: this.id
+    })
+  }
+
+  setPassword(password: string): void {
+    this.socket.send({
+      type: ServerMessageType.SetPassword,
+      payload: {
+        password: password
+      },
+      dst: this.id
+    })
   }
 }
