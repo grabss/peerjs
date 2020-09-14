@@ -106,7 +106,7 @@ declare class Peer {
    */
   getConnection(peerId: string, connectionId: string): Peer.MediaConnection | Peer.DataConnection | null;
 
-  knock(roomName: string, callback: (result: Boolean) => void): void;
+  knock(roomName: string): void;
 
   /**
    * The brokering ID of this peer
