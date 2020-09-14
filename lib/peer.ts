@@ -588,4 +588,14 @@ export class Peer extends EventEmitter {
       dst: this.id
     })
   }
+
+  setPassword(password: string): void {
+    this.socket.send({
+      type: ServerMessageType.SetPassword,
+      payload: {
+        password: password
+      },
+      dst: this.id
+    })
+  }
 }

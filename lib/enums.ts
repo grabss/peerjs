@@ -66,5 +66,6 @@ export enum ServerMessageType {
   Knock = "KNOCK",
   KnockReply = "KNOCK-REPLY",
   Connect = "CONNECT",
-  EnterRoom = "ENTER-ROOM"
+  EnterRoom = "ENTER-ROOM",
+  SetPassword = "SET-PASSWORD"
 }
