@@ -556,10 +556,16 @@ export class Peer extends EventEmitter {
       throw new Error(`Peer ${this.id} cannot reconnect because it is not disconnected from the server!`);
     }
   }
-  
-  knock(roomName: string, cb = (_: any[]) => { }): void {
-    this._api.knock(roomName)
-      .then(result => cb(result))
-      .catch(error => this._abort(PeerErrorType.ServerError, error));
+
+  knock(roomName: string): void {
+    this.socket.send({
+      type: ServerMessageType.Knock,
+      payload: {
+        roomName: roomName
+      }
+    })
+    // this._api.knock(roomName)
+    //   .then(result => cb(result))
+    //   .catch(error => this._abort(PeerErrorType.ServerError, error));
   }
 }
