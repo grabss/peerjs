@@ -24,6 +24,7 @@ class PeerOptions implements PeerJSOption {
   key?: string;
   token?: string;
   roomName?: string;
+  password?: string;
   config?: any;
   secure?: boolean;
   pingInterval?: number;
@@ -215,7 +216,12 @@ export class Peer extends EventEmitter {
   private _initialize(id: string): void {
     this._id = id;
     this._roomName = this.options.roomName;
-    this.socket.start(id, this._options.token!, this.options.roomName);
+    this.socket.start(
+      id,
+      this._options.token!,
+      this._options.roomName,
+      this._options.password
+    );
   }
 
   /** Handles messages from the server. */
