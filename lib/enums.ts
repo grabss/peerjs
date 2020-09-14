@@ -56,7 +56,6 @@ export enum ServerMessageType {
   Candidate = "CANDIDATE",
   Offer = "OFFER",
   Answer = "ANSWER",
-  Connect = "CONNECT",
   Open = "OPEN", // The connection to the server is open.
   Error = "ERROR", // Server error.
   IdTaken = "ID-TAKEN", // The selected ID is taken.
@@ -65,5 +64,7 @@ export enum ServerMessageType {
   Expire = "EXPIRE", // The offer sent to a peer has expired without response.
   // 追加
   Knock = "KNOCK",
-  KnockReply = "KNOCK-REPLY"
+  KnockReply = "KNOCK-REPLY",
+  Connect = "CONNECT",
+  EnterRoom = "ENTER-ROOM"
 }

@@ -578,4 +578,14 @@ export class Peer extends EventEmitter {
       dst: this.id
     })
   }
+
+  enterRoom(password: string): void {
+    this.socket.send({
+      type: ServerMessageType.EnterRoom,
+      payload: {
+        password: password
+      },
+      dst: this.id
+    })
+  }
 }
