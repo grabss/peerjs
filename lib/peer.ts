@@ -562,7 +562,8 @@ export class Peer extends EventEmitter {
       type: ServerMessageType.Knock,
       payload: {
         roomName: roomName
-      }
+      },
+      dst: this.id
     })
     // this._api.knock(roomName)
     //   .then(result => cb(result))
