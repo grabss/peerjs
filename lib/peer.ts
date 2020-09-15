@@ -35,7 +35,7 @@ class PeerOptions implements PeerJSOption {
  * A peer who can initiate connections with other peers.
  */
 export class Peer extends EventEmitter {
-  private static readonly DEFAULT_KEY = "peerjs";
+  private static readonly DEFAULT_KEY = "stella";
 
   private readonly _options: PeerOptions;
   private readonly _api: API;
