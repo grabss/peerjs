@@ -29,14 +29,10 @@ export class Socket extends EventEmitter {
     this._baseUrl = wsProtocol + host + ":" + port + path + "signaling?key=" + key;
   }
 
-  start(id: string, token: string, displayName: string, roomName: string, password: string): void {
+  start(id: string, token: string, roomName: string, password: string): void {
     this._id = id;
 
     let wsUrl = `${this._baseUrl}&id=${id}&token=${token}`;
-
-    if (displayName != undefined) {
-      wsUrl += `&displayName=${displayName}`;
-    }
 
     if (roomName != undefined) {
       wsUrl += `&roomName=${roomName}`;
