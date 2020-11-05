@@ -23,7 +23,6 @@ class PeerOptions implements PeerJSOption {
   path?: string;
   key?: string;
   token?: string;
-  displayName?: string;
   roomName?: string;
   password?: string;
   config?: any;
@@ -220,7 +219,6 @@ export class Peer extends EventEmitter {
     this.socket.start(
       id,
       this._options.token!,
-      this._options.displayName,
       this._options.roomName,
       this._options.password
     );
