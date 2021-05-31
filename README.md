@@ -1,6 +1,6 @@
 # PeerJS: Simple peer-to-peer with WebRTC #
 
-### https://t.me/joinchat/ENhPuhTvhm8WlIxTjQf7Og
+### https://t.me/joinchat/VWI0UBxnG7f7_DV7
 
 [![Backers on Open Collective](https://opencollective.com/peer/backers/badge.svg)](#backers)
  [![Sponsors on Open Collective](https://opencollective.com/peer/sponsors/badge.svg)](#sponsors) 
@@ -18,8 +18,11 @@ Here's an example application that uses both media and data connections: https:/
 
   with npm:
         `npm install peerjs`
-    and the usage:
+        
+  with yarn:
+        `yarn add peerjs`
   ```js
+  // The usage -
   import Peer from 'peerjs';
   ```
 
